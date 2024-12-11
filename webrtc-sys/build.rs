@@ -96,7 +96,6 @@ fn main() {
         webrtc_include.join("sdk/objc/base"),
     ]);
 
-    println!("cargo:rustc-link-search=native={}", webrtc_lib.to_str().unwrap());
 
     for (key, value) in webrtc_sys_build::webrtc_defines() {
         let value = value.as_deref();
@@ -127,6 +126,8 @@ fn main() {
             builder.flag("/std:c++20").flag("/EHsc");
         }
         "linux" => {
+            println!("cargo:rustc-link-search=native={}", webrtc_lib.to_str().unwrap());
+            
             println!("cargo:rustc-link-lib=dylib=rt");
             println!("cargo:rustc-link-lib=dylib=dl");
             println!("cargo:rustc-link-lib=dylib=pthread");
@@ -135,6 +136,8 @@ fn main() {
             builder.flag("-std=c++2a");
         }
         "macos" => {
+            println!("cargo:rustc-link-search=framework={}", webrtc_dir.to_str().unwrap());
+
             println!("cargo:rustc-link-lib=framework=Foundation");
             println!("cargo:rustc-link-lib=framework=AVFoundation");
             println!("cargo:rustc-link-lib=framework=CoreAudio");
