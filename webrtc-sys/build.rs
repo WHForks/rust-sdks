@@ -103,8 +103,6 @@ fn main() {
         builder.define(key.as_str(), value);
     }
 
-    // Link webrtc library
-    println!("cargo:rustc-link-lib=static=webrtc");
 
     let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap();
     match target_os.as_str() {
@@ -124,6 +122,7 @@ fn main() {
             println!("cargo:rustc-link-lib=dylib=dxgi");
             println!("cargo:rustc-link-lib=dylib=dwmapi");
             println!("cargo:rustc-link-lib=dylib=shcore");
+            println!("cargo:rustc-link-lib=dylib=webrtc");
 
             builder.flag("/std:c++20").flag("/EHsc");
         }
@@ -151,6 +150,7 @@ fn main() {
             println!("cargo:rustc-link-lib=framework=QuartzCore");
             println!("cargo:rustc-link-lib=framework=IOKit");
             println!("cargo:rustc-link-lib=framework=IOSurface");
+            println!("cargo:rustc-link-lib=framework=WebRTC");
 
             configure_darwin_sysroot(&mut builder);
 
