@@ -121,7 +121,6 @@ fn main() {
             println!("cargo:rustc-link-lib=dylib=dxgi");
             println!("cargo:rustc-link-lib=dylib=dwmapi");
             println!("cargo:rustc-link-lib=dylib=shcore");
-            println!("cargo:rustc-link-lib=dylib=webrtc");
 
             builder.flag("/std:c++20").flag("/EHsc");
         }
@@ -132,6 +131,7 @@ fn main() {
             println!("cargo:rustc-link-lib=dylib=dl");
             println!("cargo:rustc-link-lib=dylib=pthread");
             println!("cargo:rustc-link-lib=dylib=m");
+            println!("cargo:rustc-link-lib=dylib=webrtc");
 
             builder.flag("-std=c++2a");
         }
